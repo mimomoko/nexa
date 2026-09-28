@@ -20,20 +20,34 @@
 
   nav.id = nav.id || 'menu-principal';
 
+  // Botão que abre o menu
   var btn = document.createElement('button');
   btn.type = 'button';
   btn.className = 'menu-toggle';
   btn.setAttribute('aria-controls', nav.id);
   btn.setAttribute('aria-expanded', 'false');
   btn.innerHTML = '<span aria-hidden="true">☰</span> Menu';
-
   nav.parentNode.insertBefore(btn, nav);
 
-  btn.addEventListener('click', function () {
-    var aberto = nav.classList.toggle('aberto');
+  // Botão "×" dentro do painel
+  var fechar = document.createElement('button');
+  fechar.type = 'button';
+  fechar.className = 'menu-fechar';
+  fechar.setAttribute('aria-label', 'Fechar menu');
+  fechar.innerHTML = '&times;';
+  nav.insertBefore(fechar, nav.firstChild);
+
+  function alternar(aberto) {
+    nav.classList.toggle('aberto', aberto);
     btn.setAttribute('aria-expanded', aberto);
-    btn.innerHTML = aberto
-      ? '<span aria-hidden="true">✕</span> Fechar'
-      : '<span aria-hidden="true">☰</span> Menu';
+    (aberto ? fechar : btn).focus();
+  }
+
+  btn.addEventListener('click', function () { alternar(true); });
+  fechar.addEventListener('click', function () { alternar(false); });
+
+  // Esc também fecha
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('aberto')) alternar(false);
   });
 })();
