@@ -151,4 +151,41 @@ footer {
     justify-content: flex-start; /* alinha à esquerda */
   }
 }
+/* ===== AJUSTES PARA CELULAR ===== */
+@media (max-width: 700px) {
+
+  /* Cabeçalho mais compacto */
+  header { padding: 1rem 0; }
+  .logo { width: 48px; height: 48px; }
+  .mark { font-size: 1.3rem; }
+  .brand p { font-size: .75rem; }      /* slogan quebra em menos linhas */
+  .lede { max-width: 100%; font-size: 1.05rem; }
+
+  /* Menu: toque mais confortável (mín. ~44px de altura) */
+  nav a { padding: .7rem .8rem; }
+
+  /* Conteúdo */
+  h2 { font-size: 1.4rem; }
+  p { max-width: 100%; }
+  table { max-width: 100%; }
+
+  /* Cards de Certificados: evita estourar em telas de 320px */
+  .pair, .certs {
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  }
+
+  /* Parcerias e Projetos: título em cima, descrição embaixo */
+  .partners li, .projects li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Rodapé */
+  footer { font-size: .85rem; }
+}
+
+/* Celulares bem pequenos (até 360px) */
+@media (max-width: 360px) {
+  .brand p:not(.mark) { display: none; } /* esconde o slogan */
+}
 
