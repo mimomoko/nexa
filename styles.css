@@ -189,3 +189,47 @@ footer {
   .brand p:not(.mark) { display: none; } /* esconde o slogan */
 }
 
+/* ===== MENU RETRÁTIL NO CELULAR ===== */
+
+/* No computador o botão não existe */
+.menu-toggle { display: none; }
+
+@media (max-width: 700px) {
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin-top: 1rem;
+    padding: .6rem 1rem;
+    font: inherit;
+    font-weight: bold;
+    color: #2138CE;
+    background: #fff;
+    border: 1.5px solid #2138CE;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  /* Abas escondidas por padrão */
+  nav {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    overflow-x: visible;
+    margin-top: .5rem;
+  }
+
+  /* Aparecem ao clicar no botão */
+  nav.aberto { display: flex; }
+
+  nav a {
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  /* Aba ativa: destaque na lateral em vez de sublinhado */
+  nav a[aria-current="page"] {
+    border-bottom: 1px solid #e5e5e5;
+    border-left: 4px solid #2138CE;
+  }
+}
