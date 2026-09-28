@@ -211,38 +211,36 @@ footer {
   }
 
   /* Abas escondidas por padrão */
-   /* Painel lateral: ocupa metade da tela, à direita */
+  /* Painel lateral: ocupa metade da tela, à esquerda */
   nav {
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;                        /* antes era right: 0 */
     bottom: 0;
     width: 50vw;
-    min-width: 200px;              /* evita ficar apertado em telas muito pequenas */
+    min-width: 200px;
     margin-top: 0;
-    padding: 4rem .5rem 1rem;      /* espaço no topo para o botão de fechar */
+    padding: 4rem .5rem 1rem;
     background: #fff;
-    box-shadow: -4px 0 16px rgba(0, 0, 0, .2);
+    box-shadow: 4px 0 16px rgba(0, 0, 0, .2);  /* sombra para o lado direito */
     z-index: 50;
 
     display: flex;
     flex-direction: column;
     align-items: stretch;
     flex-wrap: nowrap;
-    overflow-y: auto;              /* rola se as abas não couberem */
+    overflow-y: auto;
     overflow-x: hidden;
 
-    transform: translateX(100%);   /* escondido fora da tela */
+    transform: translateX(-100%);   /* escondido fora da tela, pela esquerda */
     visibility: hidden;
     transition: transform .25s ease, visibility .25s;
   }
 
-  /* Aparece ao clicar no botão */
   nav.aberto {
     transform: translateX(0);
     visibility: visible;
   }
-
   nav a {
     text-align: left;
     border-bottom: 1px solid #e5e5e5;
