@@ -131,7 +131,24 @@ footer {
 }
  
 @media (max-width: 700px) {
-  nav { overflow-x: auto; flex-wrap: nowrap; }
-  .lede { font-size: 1.15rem; }
-  h2 { font-size: 1.5rem; }
+   nav {
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;       /* esconde a barra no Firefox */
+    }
+    nav::-webkit-scrollbar { display: none; } /* esconde a barra no Chrome/Safari */
+  
+    nav > * { flex: 0 0 auto; }    /* itens não são espremidos */
+  
+    /* O dropdown (hover) é cortado pelo overflow e não funciona bem no toque.
+       "Tecflix" continua acessível pela página Projetos. */
+    nav .container:hover .janela,
+    nav .janela { display: none; }
 }
+
+@media (max-width: 1150px) {
+  nav {
+    margin-top: 1rem;            /* anula o -2.7rem só nesta faixa */
+    justify-content: flex-start; /* alinha à esquerda */
+  }
+}
+
