@@ -254,3 +254,12 @@ footer {
     border-left: 4px solid #2138CE;
   }
 }
+  .menu-toggle {
+    position: relative;
+    z-index: 60;
+  }
+  .menu-toggle[aria-expanded="true"] {
+    position: fixed;
+    top: .75rem;
+    right: .75rem;
+  }
