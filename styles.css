@@ -252,12 +252,27 @@ footer {
     border-left: 4px solid #2138CE;
   }
 }
-  .menu-toggle {
-    position: relative;
-    z-index: 60;
+/* Botão "×" do painel: escondido no computador */
+.menu-fechar { display: none; }
+
+@media (max-width: 700px) {
+  .menu-fechar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;            /* relativo ao painel (que é fixed) */
+    top: .5rem;
+    right: .5rem;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: 2rem;
+    line-height: 1;
+    color: #2138CE;
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
   }
-  .menu-toggle[aria-expanded="true"] {
-    position: fixed;
-    top: .75rem;
-    right: .75rem;
-  }
+  .menu-fechar:hover { background: #f2f5fc; }
+}
