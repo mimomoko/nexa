@@ -469,3 +469,10 @@ nav a:hover::after { transform: scaleX(1); }
 
 /* A aba ativa já tem borda própria, então não precisa do ::after */
 nav a[aria-current="page"]::after { content: none; }
+/* Transição suave entre páginas (navegadores compatíveis) */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: .25s;
+  }
+}
