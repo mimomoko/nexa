@@ -317,3 +317,92 @@ footer {
 @media (max-width: 700px) {
   .processo-grid { grid-template-columns: 1fr; }
 }
+/* ===== TEMA CLARO/ESCURO ===== */
+
+[data-theme="dark"] body { background: #11141f; color: #e4e6f1; }
+[data-theme="dark"] a { color: #7e93ff; }
+
+[data-theme="dark"] header {
+  background: #1a1f33;
+  border-bottom-color: #30364f;
+}
+[data-theme="dark"] .brand p { color: #a7acc4; }
+[data-theme="dark"] .lede b { color: #3ddc97; }
+
+[data-theme="dark"] nav { background: #1a1f33; }
+[data-theme="dark"] nav a { color: #c7cae0; }
+[data-theme="dark"] nav a:hover { color: #7e93ff; }
+[data-theme="dark"] nav a[aria-current="page"] {
+  color: #7e93ff;
+  border-bottom-color: #7e93ff;
+}
+
+[data-theme="dark"] .janela {
+  background-color: #1f2440;
+  border-color: #30364f;
+}
+
+[data-theme="dark"] .pair section,
+[data-theme="dark"] .certs section,
+[data-theme="dark"] .processo-grid section {
+  background: #1a1f33;
+  border-color: #30364f;
+}
+[data-theme="dark"] .certs ul { color: #a7acc4; }
+
+[data-theme="dark"] .partners li,
+[data-theme="dark"] .projects li { border-bottom-color: #30364f; }
+[data-theme="dark"] .partners span,
+[data-theme="dark"] .projects p,
+[data-theme="dark"] .contact-note,
+[data-theme="dark"] .processo-intro p,
+[data-theme="dark"] caption { color: #a7acc4; }
+
+[data-theme="dark"] th,
+[data-theme="dark"] td { border-bottom-color: #30364f; }
+
+[data-theme="dark"] .status { border-color: #30364f; }
+[data-theme="dark"] .status.open { border-color: #3ddc97; color: #3ddc97; }
+
+[data-theme="dark"] .phone {
+  color: #e4e6f1;
+  border-bottom-color: #7e93ff;
+}
+
+[data-theme="dark"] footer {
+  border-top-color: #30364f;
+  color: #a7acc4;
+}
+
+[data-theme="dark"] .menu-toggle {
+  color: #7e93ff;
+  background: #1a1f33;
+  border-color: #7e93ff;
+}
+[data-theme="dark"] .menu-fechar { color: #7e93ff; }
+[data-theme="dark"] .menu-fechar:hover { background: #1f2440; }
+
+[data-theme="dark"] .processo-intro span { color: #7e93ff; }
+
+/* Transição suave ao trocar */
+body, header, nav, .pair section, .certs section,
+.processo-grid section, .menu-toggle {
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+
+/* Botão de alternar tema (sempre visível, desktop e mobile) */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  margin-left: .5rem;
+  padding: .4rem .8rem;
+  font: inherit;
+  font-size: .85rem;
+  color: inherit;
+  background: transparent;
+  border: 1.5px solid #ccc;
+  border-radius: 999px;
+  cursor: pointer;
+}
+[data-theme="dark"] .theme-toggle { border-color: #30364f; }
