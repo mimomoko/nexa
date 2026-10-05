@@ -476,3 +476,25 @@ nav a[aria-current="page"]::after { content: none; }
     animation-duration: .25s;
   }
 }
+
+/* Caixas de "Como trabalhamos" (Sobre nós) e "Certificados" ganham movimento no hover */
+.processo-grid section,
+.pair section,
+.certs section {
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.processo-grid section:hover,
+.pair section:hover,
+.certs section:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .12);
+  border-color: #2138CE;
+}
+
+[data-theme="dark"] .processo-grid section:hover,
+[data-theme="dark"] .pair section:hover,
+[data-theme="dark"] .certs section:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .4);
+  border-color: #7e93ff;
+}
