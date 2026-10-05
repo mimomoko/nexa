@@ -55,13 +55,10 @@
 (function () {
   var chave = 'nexa-tema';
 
-  var nav = document.querySelector('nav[aria-label="Seções do site"]');
-  if (!nav) return;
-
   var btn = document.createElement('button');
   btn.type = 'button';
   btn.className = 'theme-toggle';
-  nav.appendChild(btn);
+  document.body.appendChild(btn);
 
   function aplicar(tema) {
     document.documentElement.setAttribute('data-theme', tema);
