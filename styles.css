@@ -391,18 +391,27 @@ body, header, nav, .pair section, .certs section,
 }
 
 /* Botão de alternar tema (sempre visível, desktop e mobile) */
+/* Botão de alternar tema: fixo no canto inferior direito */
 .theme-toggle {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 40;
+
   display: inline-flex;
   align-items: center;
   gap: .4rem;
-  margin-left: .5rem;
-  padding: .4rem .8rem;
+  padding: .6rem 1rem;
   font: inherit;
   font-size: .85rem;
   color: inherit;
-  background: transparent;
+  background: #fff;
   border: 1.5px solid #ccc;
   border-radius: 999px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
   cursor: pointer;
 }
-[data-theme="dark"] .theme-toggle { border-color: #30364f; }
+[data-theme="dark"] .theme-toggle {
+  background: #1a1f33;
+  border-color: #30364f;
+}
