@@ -445,3 +445,27 @@ body, header, nav, .pair section, .certs section,
   border-color: #30364f;
 }
 [data-theme="dark"] p { color: #c7cae0; } /*Só muda os textos maiores*/
+
+/* Transição suave no hover e na aba ativa */
+nav a {
+  transition: color .2s ease, border-color .2s ease, background-color .2s ease;
+  position: relative;
+}
+
+/* Sublinhado que "desliza" ao passar o mouse */
+nav a::after {
+  content: '';
+  position: absolute;
+  left: .7rem;
+  right: .7rem;
+  bottom: 0;
+  height: 2px;
+  background: #2138CE;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .25s ease;
+}
+nav a:hover::after { transform: scaleX(1); }
+
+/* A aba ativa já tem borda própria, então não precisa do ::after */
+nav a[aria-current="page"]::after { content: none; }
