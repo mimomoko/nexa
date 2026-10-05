@@ -416,3 +416,13 @@ body, header, nav, .pair section, .certs section,
   border-color: #30364f;
 }
 [data-theme="dark"] p { color: #c7cae0; } /*Só muda os textos maiores*/
+@media (max-width: 700px) {
+  .janela {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 85%;
+    max-width: 180px;
+    text-align: center;
+  }
+}
