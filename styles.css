@@ -48,11 +48,11 @@ nav a:hover {
   display: none;
   position: absolute;
   top: 100%;              /* gruda o dropdown logo abaixo do "Projetos" */
-  left: 0;
+  right: 0;
   background-color: #f9f9f9;
   border: 1px solid #ccc;
   padding: 10px;
-  width: 145px;
+  width: 160px;
   z-index: 20;
   border-radius: 8px;
 }
