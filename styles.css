@@ -8,7 +8,8 @@ body {
   line-height: 1.6;
 }
 
-a { color: #2138CE; }
+a { color: #2138CE;
+    text-decoration: none;}
 
 .wrap { max-width: 1390px; margin: 0 auto; padding: 0 1rem; }
 
