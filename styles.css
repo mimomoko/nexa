@@ -415,3 +415,4 @@ body, header, nav, .pair section, .certs section,
   background: #1a1f33;
   border-color: #30364f;
 }
+[data-theme="dark"] p { color: #c7cae0; } /*Só muda os textos maiores*/
