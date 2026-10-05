@@ -64,7 +64,7 @@ nav a:hover {
 }
 
 .projects li {
-  display: block;           /* tira o layout de linha (flex) que .projects herdava */
+  display: block !important;           /* tira o layout de linha (flex) que .projects herdava */
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 10px;
