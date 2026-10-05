@@ -498,3 +498,9 @@ nav a[aria-current="page"]::after { content: none; }
   box-shadow: 0 10px 20px rgba(0, 0, 0, .4);
   border-color: #7e93ff;
 }
+/* Arredonda as pontas das caixas */
+.processo-grid section,
+.pair section,
+.certs section {
+  border-radius: 10px;
+}
