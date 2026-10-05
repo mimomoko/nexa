@@ -51,3 +51,32 @@
     if (e.key === 'Escape' && nav.classList.contains('aberto')) alternar(false);
   });
 })();
+/* Alternar tema claro/escuro */
+(function () {
+  var chave = 'nexa-tema';
+
+  var nav = document.querySelector('nav[aria-label="Seções do site"]');
+  if (!nav) return;
+
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'theme-toggle';
+  nav.appendChild(btn);
+
+  function aplicar(tema) {
+    document.documentElement.setAttribute('data-theme', tema);
+    localStorage.setItem(chave, tema);
+    btn.innerHTML = tema === 'dark'
+      ? '<span aria-hidden="true">☀️</span> Claro'
+      : '<span aria-hidden="true">🌙</span> Escuro';
+  }
+
+  var salvo = window.localStorage ? localStorage.getItem(chave) : null;
+  var prefereEscuro = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  aplicar(salvo || (prefereEscuro ? 'dark' : 'light'));
+
+  btn.addEventListener('click', function () {
+    var atual = document.documentElement.getAttribute('data-theme');
+    aplicar(atual === 'dark' ? 'light' : 'dark');
+  });
+})();
