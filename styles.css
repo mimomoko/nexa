@@ -1,5 +1,5 @@
 * { box-sizing: border-box; }
- 
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -7,47 +7,70 @@ body {
   background: #f2f5fc;
   line-height: 1.6;
 }
- 
+
 a { color: #2138CE; }
 
-/*Mudei max-width*/
 .wrap { max-width: 1390px; margin: 0 auto; padding: 0 1rem; }
- 
+
+/* ===== CABEÇALHO ===== */
 header {
   background: #fff;
   border-bottom: 1px solid #ccc;
   padding: 1.5rem 0;
 }
-.logo{ width:70px; height:70px; flex:none; }
+.logo { width: 70px; height: 70px; flex: none; }
 .brand { display: flex; align-items: center; gap: .4rem; text-decoration: none; color: inherit; }
 .mark { font-size: 1.6rem; font-weight: bold; margin: 0; }
 .brand p { margin: .2rem 0 0; font-size: .9rem; color: #555; }
 .lede { max-width: 500px; font-size: 1.3rem; margin: 1rem 0 0; }
 .lede b { color: #0A6E60; }
 
-.header-top {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1.5rem;
-}
- 
+.header-top { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; }
+
+/* ===== NAVEGAÇÃO ===== */
 nav {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;   /* alinha todos os itens (inclusive o container) na mesma linha */
+  align-items: center;
   gap: .3rem;
   margin-top: -2.7rem; /*NÃO MUDAR*/
   justify-content: flex-end;
+  position: relative;
 }
-nav a:hover {
- color: #C4C4C4;
+nav a {
+  text-decoration: none;
+  color: #444;
+  padding: .4rem .7rem;
+  white-space: nowrap;
+  text-align: center;
+  position: relative;
+  transition: color .2s ease, border-color .2s ease, background-color .2s ease;
 }
+nav a:hover { color: #C4C4C4; }
+nav a[aria-current="page"] { font-weight: bold; color: #2138CE; border-bottom: 2px solid #2138CE; }
 
+/* Sublinhado animado no hover */
+nav a::after {
+  content: '';
+  position: absolute;
+  left: .7rem;
+  right: .7rem;
+  bottom: 0;
+  height: 2px;
+  background: #2138CE;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .25s ease;
+}
+nav a:hover::after { transform: scaleX(1); }
+nav a[aria-current="page"]::after { content: none; }
+
+/* Dropdown "Projetos > Tecflix" */
+.container { position: relative; display: flex; align-items: center; }
 .janela {
   display: none;
   position: absolute;
-  top: 100%;              /* gruda o dropdown logo abaixo do "Projetos" */
+  top: 100%;
   right: 0;
   background-color: #f9f9f9;
   border: 1px solid #ccc;
@@ -56,70 +79,37 @@ nav a:hover {
   z-index: 20;
   border-radius: 8px;
 }
-/* Projetos em formato de cartão, como "Como trabalhamos" */
-.projects {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
+.container:hover .janela { display: block; box-sizing: border-box; }
 
-.projects li {
-  display: block !important;           /* tira o layout de linha (flex) que .projects herdava */
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 1.25rem;
-  margin: 0;
-
-  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-}
-
-.projects li:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, .12);
-  border-color: #2138CE;
-}
-
-.projects p { margin-top: .4rem; }   /* espaço entre título e descrição, já que não ficam mais lado a lado */
-
-/* Tema escuro */
-[data-theme="dark"] .projects li {
-  background: #1a1f33;
-  border-color: #30364f;
-}
-[data-theme="dark"] .projects li:hover {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, .4);
-  border-color: #7e93ff;
-}
-.container:hover .janela {
-  display: block;
-  box-sizing: border-box;
-}
-
-.container {
-  position: relative;   /* <- essa linha é essencial */
-  display: flex;
-  align-items: center;
-}
-
-nav a { text-decoration: none; color: #444; padding: .4rem .7rem; white-space: nowrap; text-align: center; }
-nav a[aria-current="page"] { font-weight: bold; color: #2138CE; border-bottom: 2px solid #2138CE; }
- 
+/* ===== TEXTOS GERAIS ===== */
 h2 { font-size: 1.8rem; margin-bottom: 1rem; }
 h3 { margin: 0 0 .4rem; }
 p { max-width: 60ch; }
-/* Link dentro do título do projeto parece texto normal */
-.projects h3 a {
-  color: inherit;
-  text-decoration: none;
-}
-.projects h3 a:hover,
-.projects h3 a:focus {
-  text-decoration: underline;   /* mantém uma pista visual ao passar o mouse/focar */
-}
 
+/* ===== SEÇÃO "COMO TRABALHAMOS" (Sobre nós) ===== */
+.processo {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2rem;
+  align-items: start;
+  padding: 3rem 0;
+}
+.processo-intro span {
+  display: inline-block;
+  font-size: .85rem;
+  font-weight: bold;
+  letter-spacing: .08em;
+  color: #2138CE;
+  margin-bottom: .5rem;
+}
+.processo-intro h2 { margin: 0 0 1rem; }
+.processo-intro p { color: #555; }
+.processo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.processo-grid section { background: #fff; border: 1px solid #ccc; padding: 1.25rem; }
+.processo-grid h3 { margin: 0 0 .4rem; font-size: 1.05rem; }
+.processo-grid p { margin: 0; color: #555; font-size: .95rem; }
 
- 
+/* ===== CARDS (Certificados / "Como trabalhamos") ===== */
 .pair, .certs {
   display: grid;
   gap: 1rem;
@@ -128,9 +118,25 @@ p { max-width: 60ch; }
 }
 .pair section, .certs section { background: #fff; border: 1px solid #ccc; padding: 1rem; }
 .certs ul { margin: 0; padding-left: 1.1rem; color: #555; }
- 
-.partners, .projects { list-style: none; padding: 0; margin: 0; }
-.partners li, .projects li {
+
+/* Arredondado + efeito de hover (subir e dar sombra), reaproveitado nas 3 seções de card */
+.processo-grid section,
+.pair section,
+.certs section {
+  border-radius: 10px;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.processo-grid section:hover,
+.pair section:hover,
+.certs section:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .12);
+  border-color: #2138CE;
+}
+
+/* ===== PARCERIAS (lista) ===== */
+.partners { list-style: none; padding: 0; margin: 0; }
+.partners li {
   border-bottom: 1px solid #ccc;
   padding: .9rem 0;
   display: flex;
@@ -139,13 +145,31 @@ p { max-width: 60ch; }
   gap: .5rem;
 }
 .partners span { color: #555; font-size: .9rem; }
+
+/* ===== PROJETOS (cartões empilhados) ===== */
+.projects { list-style: none; margin: 0; display: grid; grid-template-columns: 1fr; gap: 1rem; }
+.projects li {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 1.25rem 1.25rem 1.25rem 2rem; /* mais espaço à esquerda */
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.projects li:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .12);
+  border-color: #2138CE;
+}
 .projects h3 { font-size: 1.15rem; }
-.projects p { margin: 0; color: #555; }
- 
+.projects h3 a { color: inherit; text-decoration: none; }
+.projects h3 a:hover, .projects h3 a:focus { text-decoration: underline; }
+.projects p { margin-top: .4rem; color: #555; }
+
+/* ===== TABELA / STATUS / TELEFONE ===== */
 table { width: 100%; max-width: 400px; border-collapse: collapse; margin: 0 0 1.25rem; }
 caption { text-align: left; color: #555; font-size: .9rem; padding-bottom: .5rem; }
 th, td { text-align: left; padding: .6rem .4rem; border-bottom: 1px solid #ccc; }
- 
+
 .status {
   display: inline-flex;
   align-items: center;
@@ -155,7 +179,7 @@ th, td { text-align: left; padding: .6rem .4rem; border-bottom: 1px solid #ccc; 
   border-radius: 999px;
 }
 .status.open { border-color: #0A6E60; color: #0A6E60; }
- 
+
 .phone {
   display: inline-block;
   font-size: clamp(1.5rem, 5vw, 2.2rem);
@@ -166,7 +190,7 @@ th, td { text-align: left; padding: .6rem .4rem; border-bottom: 1px solid #ccc; 
   padding-bottom: .15rem;
 }
 .contact-note { margin-top: 1.5rem; color: #555; }
- 
+
 footer {
   border-top: 1px solid #ccc;
   margin-top: 2rem;
@@ -175,91 +199,66 @@ footer {
   font-size: .9rem;
 }
 
-@media (max-width: 700px) {
-  /* Deixa de ser caixinha flutuante e vira parte da lista */
-  .janela {
-    position: static;
-    transform: none;
-    width: auto;
-    max-width: none;
-    left: auto;
-    text-align: left;
-    margin: .3rem 0 .3rem 1rem;  /* recuo para indicar que é subitem */
-    border-radius: 6px;
-  }
+/* ===== BOTÃO MENU MOBILE (☰) ===== */
+.menu-toggle { display: none; }
 
-  /* .container some como "caixa", os links dele ficam na lista normal */
-  nav .container {
-    display: block;
-    width: 100%;
-  }
-}
- 
-@media (max-width: 700px) {
-   nav {
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;       /* esconde a barra no Firefox */
-    }
-    nav::-webkit-scrollbar { display: none; } /* esconde a barra no Chrome/Safari */
-  
-    nav > * { flex: 0 0 auto; }    /* itens não são espremidos */
-  
-    /* O dropdown (hover) é cortado pelo overflow e não funciona bem no toque.
-       "Tecflix" continua acessível pela página Projetos. */
-    nav .container:hover .janela,
-    nav .janela { display: none; }
+/* ===== BOTÃO "×" DO PAINEL MOBILE ===== */
+.menu-fechar { display: none; }
+
+/* ===== BOTÃO DE TEMA (fixo, canto inferior direito) ===== */
+.theme-toggle {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .6rem 1rem;
+  font: inherit;
+  font-size: .85rem;
+  color: inherit;
+  background: #fff;
+  border: 1.5px solid #ccc;
+  border-radius: 999px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+  cursor: pointer;
 }
 
-@media (max-width: 1150px) {
-  nav {
-    margin-top: 1rem;            /* anula o -2.7rem só nesta faixa */
-    justify-content: flex-start; /* alinha à esquerda */
+/* ===== TRANSIÇÃO ENTRE PÁGINAS ===== */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: .25s;
   }
 }
-/* ===== AJUSTES PARA CELULAR ===== */
+
+/* ===================================================
+   RESPONSIVO — CELULAR (até 700px)
+   =================================================== */
 @media (max-width: 700px) {
 
-  /* Cabeçalho mais compacto */
+  /* Cabeçalho compacto */
   header { padding: 1rem 0; }
   .logo { width: 48px; height: 48px; }
   .mark { font-size: 1.3rem; }
-  .brand p { font-size: .75rem; }      /* slogan quebra em menos linhas */
+  .brand p { font-size: .75rem; }
   .lede { max-width: 100%; font-size: 1.05rem; }
-
-  /* Menu: toque mais confortável (mín. ~44px de altura) */
-  nav a { padding: .7rem .8rem; }
 
   /* Conteúdo */
   h2 { font-size: 1.4rem; }
   p { max-width: 100%; }
   table { max-width: 100%; }
 
-  /* Cards de Certificados: evita estourar em telas de 320px */
   .pair, .certs {
     grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
   }
+  .processo-grid { grid-template-columns: 1fr; }
+  .partners li { flex-direction: column; align-items: flex-start; }
 
-  /* Parcerias e Projetos: título em cima, descrição embaixo */
-  .partners li, .projects li {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  /* Rodapé */
   footer { font-size: .85rem; }
-}
 
-/* Celulares bem pequenos (até 360px) */
-@media (max-width: 360px) {
-  .brand p:not(.mark) { display: none; } /* esconde o slogan */
-}
-
-/* ===== MENU RETRÁTIL NO CELULAR ===== */
-
-/* No computador o botão não existe */
-.menu-toggle { display: none; }
-
-@media (max-width: 700px) {
+  /* Botão ☰ Menu */
   .menu-toggle {
     display: inline-flex;
     align-items: center;
@@ -275,57 +274,56 @@ footer {
     cursor: pointer;
   }
 
-  /* Abas escondidas por padrão */
-  /* Painel lateral: ocupa metade da tela, à esquerda */
+  /* Painel lateral (ocupa metade da tela, à esquerda) */
   nav {
     position: fixed;
     top: 0;
-    left: 0;                        /* antes era right: 0 */
+    left: 0;
     bottom: 0;
     width: 50vw;
     min-width: 200px;
     margin-top: 0;
     padding: 4rem .5rem 1rem;
     background: #fff;
-    box-shadow: 4px 0 16px rgba(0, 0, 0, .2);  /* sombra para o lado direito */
+    box-shadow: 4px 0 16px rgba(0, 0, 0, .2);
     z-index: 50;
-
     display: flex;
     flex-direction: column;
     align-items: stretch;
     flex-wrap: nowrap;
     overflow-y: auto;
     overflow-x: hidden;
-
-    transform: translateX(-100%);   /* escondido fora da tela, pela esquerda */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    transform: translateX(-100%);
     visibility: hidden;
     transition: transform .25s ease, visibility .25s;
   }
+  nav::-webkit-scrollbar { display: none; }
+  nav.aberto { transform: translateX(0); visibility: visible; }
+  nav > * { flex: 0 0 auto; }
+  nav a { text-align: left; padding: .7rem .8rem; border-bottom: 1px solid #e5e5e5; }
+  nav a[aria-current="page"] { border-bottom: 1px solid #e5e5e5; border-left: 4px solid #2138CE; }
 
-  nav.aberto {
-    transform: translateX(0);
-    visibility: visible;
-  }
-  nav a {
+  /* Dropdown "Tecflix" vira subitem da lista, em vez de flutuar */
+  .janela {
+    position: static;
+    transform: none;
+    width: auto;
+    max-width: none;
+    left: auto;
     text-align: left;
-    border-bottom: 1px solid #e5e5e5;
+    margin: .3rem 0 .3rem 1rem;
+    border-radius: 6px;
   }
+  nav .container { display: block; width: 100%; }
 
-  /* Aba ativa: destaque na lateral em vez de sublinhado */
-  nav a[aria-current="page"] {
-    border-bottom: 1px solid #e5e5e5;
-    border-left: 4px solid #2138CE;
-  }
-}
-/* Botão "×" do painel: escondido no computador */
-.menu-fechar { display: none; }
-
-@media (max-width: 700px) {
+  /* Botão "×" dentro do painel */
   .menu-fechar {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;            /* relativo ao painel (que é fixed) */
+    position: absolute;
     top: .5rem;
     right: .5rem;
     width: 40px;
@@ -342,201 +340,75 @@ footer {
   .menu-fechar:hover { background: #f2f5fc; }
 }
 
-/* ===== SEÇÃO "COMO TRABALHAMOS" ===== */
-.processo {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 2rem;
-  align-items: start;
-  padding: 3rem 0;
+/* Celulares bem pequenos */
+@media (max-width: 360px) {
+  .brand p:not(.mark) { display: none; }
 }
 
-.processo-intro span {
-  display: inline-block;
-  font-size: .85rem;
-  font-weight: bold;
-  letter-spacing: .08em;
-  color: #2138CE;
-  margin-bottom: .5rem;
+/* Faixa intermediária: evita o menu sobrepor a logo */
+@media (max-width: 1150px) and (min-width: 701px) {
+  nav { margin-top: 1rem; justify-content: flex-start; }
 }
-.processo-intro h2 { margin: 0 0 1rem; }
-.processo-intro p { color: #555; }
 
-.processo-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-}
-.processo-grid section {
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 1.25rem;
-}
-.processo-grid h3 { margin: 0 0 .4rem; font-size: 1.05rem; }
-.processo-grid p { margin: 0; color: #555; font-size: .95rem; }
-
-/* Responsivo */
-@media (max-width: 900px) {
-  .processo { grid-template-columns: 1fr; }
-}
-@media (max-width: 700px) {
-  .processo-grid { grid-template-columns: 1fr; }
-}
-/* ===== TEMA CLARO/ESCURO ===== */
-
+/* ===================================================
+   TEMA ESCURO
+   =================================================== */
 [data-theme="dark"] body { background: #11141f; color: #e4e6f1; }
 [data-theme="dark"] a { color: #7e93ff; }
+[data-theme="dark"] p { color: #c7cae0; }
 
-[data-theme="dark"] header {
-  background: #1a1f33;
-  border-bottom-color: #30364f;
-}
+[data-theme="dark"] header { background: #1a1f33; border-bottom-color: #30364f; }
 [data-theme="dark"] .brand p { color: #a7acc4; }
 [data-theme="dark"] .lede b { color: #3ddc97; }
 
 [data-theme="dark"] nav { background: #1a1f33; }
 [data-theme="dark"] nav a { color: #c7cae0; }
 [data-theme="dark"] nav a:hover { color: #7e93ff; }
-[data-theme="dark"] nav a[aria-current="page"] {
-  color: #7e93ff;
-  border-bottom-color: #7e93ff;
-}
+[data-theme="dark"] nav a[aria-current="page"] { color: #7e93ff; border-bottom-color: #7e93ff; }
 
-[data-theme="dark"] .janela {
-  background-color: #1f2440;
-  border-color: #30364f;
-}
+[data-theme="dark"] .janela { background-color: #1f2440; border-color: #30364f; }
 
 [data-theme="dark"] .pair section,
 [data-theme="dark"] .certs section,
-[data-theme="dark"] .processo-grid section {
+[data-theme="dark"] .processo-grid section,
+[data-theme="dark"] .projects li {
   background: #1a1f33;
   border-color: #30364f;
 }
 [data-theme="dark"] .certs ul { color: #a7acc4; }
 
-[data-theme="dark"] .partners li,
-[data-theme="dark"] .projects li { border-bottom-color: #30364f; }
+[data-theme="dark"] .processo-grid section:hover,
+[data-theme="dark"] .pair section:hover,
+[data-theme="dark"] .certs section:hover,
+[data-theme="dark"] .projects li:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .4);
+  border-color: #7e93ff;
+}
+
+[data-theme="dark"] .partners li { border-bottom-color: #30364f; }
 [data-theme="dark"] .partners span,
-[data-theme="dark"] .projects p,
 [data-theme="dark"] .contact-note,
 [data-theme="dark"] .processo-intro p,
 [data-theme="dark"] caption { color: #a7acc4; }
 
-[data-theme="dark"] th,
-[data-theme="dark"] td { border-bottom-color: #30364f; }
+[data-theme="dark"] th, [data-theme="dark"] td { border-bottom-color: #30364f; }
 
 [data-theme="dark"] .status { border-color: #30364f; }
 [data-theme="dark"] .status.open { border-color: #3ddc97; color: #3ddc97; }
 
-[data-theme="dark"] .phone {
-  color: #e4e6f1;
-  border-bottom-color: #7e93ff;
-}
+[data-theme="dark"] .phone { color: #e4e6f1; border-bottom-color: #7e93ff; }
 
-[data-theme="dark"] footer {
-  border-top-color: #30364f;
-  color: #a7acc4;
-}
+[data-theme="dark"] footer { border-top-color: #30364f; color: #a7acc4; }
 
-[data-theme="dark"] .menu-toggle {
-  color: #7e93ff;
-  background: #1a1f33;
-  border-color: #7e93ff;
-}
+[data-theme="dark"] .menu-toggle { color: #7e93ff; background: #1a1f33; border-color: #7e93ff; }
 [data-theme="dark"] .menu-fechar { color: #7e93ff; }
 [data-theme="dark"] .menu-fechar:hover { background: #1f2440; }
+[data-theme="dark"] .theme-toggle { background: #1a1f33; border-color: #30364f; }
 
 [data-theme="dark"] .processo-intro span { color: #7e93ff; }
 
-/* Transição suave ao trocar */
+/* Transição suave ao trocar de tema */
 body, header, nav, .pair section, .certs section,
-.processo-grid section, .menu-toggle {
+.processo-grid section, .projects li, .menu-toggle {
   transition: background-color .2s ease, color .2s ease, border-color .2s ease;
-}
-
-/* Botão de alternar tema (sempre visível, desktop e mobile) */
-/* Botão de alternar tema: fixo no canto inferior direito */
-.theme-toggle {
-  position: fixed;
-  right: 1.25rem;
-  bottom: 1.25rem;
-  z-index: 40;
-
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  padding: .6rem 1rem;
-  font: inherit;
-  font-size: .85rem;
-  color: inherit;
-  background: #fff;
-  border: 1.5px solid #ccc;
-  border-radius: 999px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
-  cursor: pointer;
-}
-[data-theme="dark"] .theme-toggle {
-  background: #1a1f33;
-  border-color: #30364f;
-}
-[data-theme="dark"] p { color: #c7cae0; } /*Só muda os textos maiores*/
-
-/* Transição suave no hover e na aba ativa */
-nav a {
-  transition: color .2s ease, border-color .2s ease, background-color .2s ease;
-  position: relative;
-}
-
-/* Sublinhado que "desliza" ao passar o mouse */
-nav a::after {
-  content: '';
-  position: absolute;
-  left: .7rem;
-  right: .7rem;
-  bottom: 0;
-  height: 2px;
-  background: #2138CE;
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform .25s ease;
-}
-nav a:hover::after { transform: scaleX(1); }
-
-/* A aba ativa já tem borda própria, então não precisa do ::after */
-nav a[aria-current="page"]::after { content: none; }
-/* Transição suave entre páginas (navegadores compatíveis) */
-@media (prefers-reduced-motion: no-preference) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation-duration: .25s;
-  }
-}
-
-/* Caixas de "Como trabalhamos" (Sobre nós) e "Certificados" ganham movimento no hover */
-.processo-grid section,
-.pair section,
-.certs section {
-  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-}
-
-.processo-grid section:hover,
-.pair section:hover,
-.certs section:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, .12);
-  border-color: #2138CE;
-}
-
-[data-theme="dark"] .processo-grid section:hover,
-[data-theme="dark"] .pair section:hover,
-[data-theme="dark"] .certs section:hover {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, .4);
-  border-color: #7e93ff;
-}
-/* Arredonda as pontas das caixas */
-.processo-grid section,
-.pair section,
-.certs section {
-  border-radius: 10px;
 }
