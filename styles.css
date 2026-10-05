@@ -129,6 +129,26 @@ footer {
   color: #555;
   font-size: .9rem;
 }
+
+@media (max-width: 700px) {
+  /* Deixa de ser caixinha flutuante e vira parte da lista */
+  .janela {
+    position: static;
+    transform: none;
+    width: auto;
+    max-width: none;
+    left: auto;
+    text-align: left;
+    margin: .3rem 0 .3rem 1rem;  /* recuo para indicar que é subitem */
+    border-radius: 6px;
+  }
+
+  /* .container some como "caixa", os links dele ficam na lista normal */
+  nav .container {
+    display: block;
+    width: 100%;
+  }
+}
  
 @media (max-width: 700px) {
    nav {
@@ -416,13 +436,3 @@ body, header, nav, .pair section, .certs section,
   border-color: #30364f;
 }
 [data-theme="dark"] p { color: #c7cae0; } /*Só muda os textos maiores*/
-@media (max-width: 700px) {
-  .janela {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    width: 85%;
-    max-width: 180px;
-    text-align: center;
-  }
-}
