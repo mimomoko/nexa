@@ -426,3 +426,15 @@ body, header, nav, .pair section, .certs section,
 }
 /* ===== ROLAGEM SUAVE ===== */
 html { scroll-behavior: smooth; }
+/* ===== BARRA DE PROGRESSO DE LEITURA ===== */
+.progresso-leitura {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: #2138CE;
+  z-index: 60;
+  transition: width .1s linear;
+}
+[data-theme="dark"] .progresso-leitura { background: #7e93ff; }
