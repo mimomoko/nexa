@@ -56,7 +56,41 @@ nav a:hover {
   z-index: 20;
   border-radius: 8px;
 }
+/* Projetos em formato de cartão, como "Como trabalhamos" */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
 
+.projects li {
+  display: block;           /* tira o layout de linha (flex) que .projects herdava */
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin: 0;
+
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.projects li:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .12);
+  border-color: #2138CE;
+}
+
+.projects p { margin-top: .4rem; }   /* espaço entre título e descrição, já que não ficam mais lado a lado */
+
+/* Tema escuro */
+[data-theme="dark"] .projects li {
+  background: #1a1f33;
+  border-color: #30364f;
+}
+[data-theme="dark"] .projects li:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .4);
+  border-color: #7e93ff;
+}
 .container:hover .janela {
   display: block;
   box-sizing: border-box;
