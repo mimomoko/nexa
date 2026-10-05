@@ -276,3 +276,44 @@ footer {
   }
   .menu-fechar:hover { background: #f2f5fc; }
 }
+
+/* ===== SEÇÃO "COMO TRABALHAMOS" ===== */
+.processo {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2rem;
+  align-items: start;
+  padding: 3rem 0;
+}
+
+.processo-intro span {
+  display: inline-block;
+  font-size: .85rem;
+  font-weight: bold;
+  letter-spacing: .08em;
+  color: #2138CE;
+  margin-bottom: .5rem;
+}
+.processo-intro h2 { margin: 0 0 1rem; }
+.processo-intro p { color: #555; }
+
+.processo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.processo-grid section {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 1.25rem;
+}
+.processo-grid h3 { margin: 0 0 .4rem; font-size: 1.05rem; }
+.processo-grid p { margin: 0; color: #555; font-size: .95rem; }
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .processo { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .processo-grid { grid-template-columns: 1fr; }
+}
