@@ -93,3 +93,23 @@
   window.addEventListener('resize', atualizar);
   atualizar();
 })();
+/* Botão voltar ao topo */
+(function () {
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'voltar-topo';
+  btn.setAttribute('aria-label', 'Voltar ao topo');
+  btn.innerHTML = '&uarr;';
+  document.body.appendChild(btn);
+
+  function alternarVisibilidade() {
+    btn.classList.toggle('visivel', window.scrollY > 400);
+  }
+
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  document.addEventListener('scroll', alternarVisibilidade);
+  alternarVisibilidade();
+})();
