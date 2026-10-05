@@ -370,7 +370,7 @@ footer {
 [data-theme="dark"] .brand p { color: #a7acc4; }
 [data-theme="dark"] .lede b { color: #3ddc97; }
 
-[data-theme="dark"] nav { background: #1a1f33; }
+[data-theme="dark"] nav { background: transparent; }
 [data-theme="dark"] nav a { color: #c7cae0; }
 [data-theme="dark"] nav a:hover { color: #7e93ff; }
 [data-theme="dark"] nav a[aria-current="page"] { color: #7e93ff; border-bottom-color: #7e93ff; }
