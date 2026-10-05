@@ -117,9 +117,7 @@ p { max-width: 60ch; }
 .projects h3 a:focus {
   text-decoration: underline;   /* mantém uma pista visual ao passar o mouse/focar */
 }
-.projects h3 {
-  margin-left: 1rem;   /* ajuste o valor: 1rem, 1.5rem, 2rem... quanto maior, mais desloca */
-}
+
 
  
 .pair, .certs {
