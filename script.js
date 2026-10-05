@@ -77,3 +77,19 @@
     aplicar(atual === 'dark' ? 'light' : 'dark');
   });
 })();
+/* Barra de progresso de leitura */
+(function () {
+  var barra = document.createElement('div');
+  barra.className = 'progresso-leitura';
+  document.body.appendChild(barra);
+
+  function atualizar() {
+    var alturaTotal = document.documentElement.scrollHeight - window.innerHeight;
+    var progresso = alturaTotal > 0 ? (window.scrollY / alturaTotal) * 100 : 0;
+    barra.style.width = progresso + '%';
+  }
+
+  document.addEventListener('scroll', atualizar);
+  window.addEventListener('resize', atualizar);
+  atualizar();
+})();
