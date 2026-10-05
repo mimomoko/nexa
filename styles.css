@@ -149,6 +149,7 @@ p { max-width: 60ch; }
 /* ===== PROJETOS (cartões empilhados) ===== */
 .projects { list-style: none; margin: 0; display: grid; grid-template-columns: 1fr; gap: 1rem; }
 .projects li {
+  position: relative;
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 10px;
