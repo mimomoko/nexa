@@ -424,3 +424,5 @@ body, header, nav, .pair section, .certs section,
 .processo-grid section, .projects li, .menu-toggle {
   transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
+/* ===== ROLAGEM SUAVE ===== */
+html { scroll-behavior: smooth; }
