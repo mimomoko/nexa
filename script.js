@@ -1,115 +1,24 @@
-(function () {
-  var box = document.getElementById('status');
-  if (!box) return;
- 
-  var now = new Date();
-  var day = now.getDay();
-  var minutes = now.getHours() * 60 + now.getMinutes();
-  var open = false;
- 
-  if (day >= 1 && day <= 5) open = minutes >= 540 && minutes < 1080;
-  else if (day === 6) open = minutes >= 540 && minutes < 810;
- 
-  box.classList.toggle('open', open);
-  document.getElementById('status-text').textContent = open ? 'Aberto agora' : 'Fechado agora';
-})();
-/* Botão de menu para celular */
-(function () {
-  var nav = document.querySelector('nav[aria-label="Seções do site"]');
-  if (!nav) return;
-
-  nav.id = nav.id || 'menu-principal';
-
-  // Botão que abre o menu
-  var btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'menu-toggle';
-  btn.setAttribute('aria-controls', nav.id);
-  btn.setAttribute('aria-expanded', 'false');
-  btn.innerHTML = '<span aria-hidden="true">☰</span> Menu';
-  nav.parentNode.insertBefore(btn, nav);
-
-  // Botão "×" dentro do painel
-  var fechar = document.createElement('button');
-  fechar.type = 'button';
-  fechar.className = 'menu-fechar';
-  fechar.setAttribute('aria-label', 'Fechar menu');
-  fechar.innerHTML = '&times;';
-  nav.insertBefore(fechar, nav.firstChild);
-
-  function alternar(aberto) {
-    nav.classList.toggle('aberto', aberto);
-    btn.setAttribute('aria-expanded', aberto);
-    (aberto ? fechar : btn).focus();
+const R=document.documentElement,tt=document.querySelector('.tt'),b=document.querySelector('.burger'),m=document.querySelector('.menu');
+tt.onclick=()=>{const dark=R.dataset.theme?R.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;const n=dark?'light':'dark';R.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}};
+const tg=o=>{b.classList.toggle('on',o);m.classList.toggle('on',o);b.setAttribute('aria-expanded',o);document.body.classList.toggle('lock',o)};
+b.onclick=()=>tg(!b.classList.contains('on'));
+m.querySelectorAll('a').forEach(a=>a.onclick=()=>tg(false));
+addEventListener('keydown',e=>{if(e.key==='Escape')tg(false)});
+addEventListener('scroll',()=>document.body.classList.toggle('sc',scrollY>20),{passive:true});
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(e=>io.observe(e));
+/* horário de funcionamento */
+const st=document.getElementById('status-text');
+if(st){
+  const H={1:[540,1080],2:[540,1080],3:[540,1080],4:[540,1080],5:[540,1080],6:[540,810]};
+  const D=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+  const f=n=>Math.floor(n/60)+':'+String(n%60).padStart(2,'0');
+  const now=new Date(),d=now.getDay(),t=now.getHours()*60+now.getMinutes(),h=H[d];
+  if(h&&t>=h[0]&&t<h[1]){st.textContent='Aberto agora, até as '+f(h[1]);st.parentElement.classList.add('open')}
+  else{
+    let i=(h&&t<h[0])?0:1;
+    while(!H[(d+i)%7])i++;
+    const nd=(d+i)%7;
+    st.textContent='Fechado no momento. Abre '+(i===0?'hoje':i===1?'amanhã':D[nd])+' às '+f(H[nd][0]);
   }
-
-  btn.addEventListener('click', function () { alternar(true); });
-  fechar.addEventListener('click', function () { alternar(false); });
-
-  // Esc também fecha
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && nav.classList.contains('aberto')) alternar(false);
-  });
-})();
-/* Alternar tema claro/escuro */
-(function () {
-  var chave = 'nexa-tema';
-
-  var btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'theme-toggle';
-  document.body.appendChild(btn);
-
-  function aplicar(tema) {
-    document.documentElement.setAttribute('data-theme', tema);
-    localStorage.setItem(chave, tema);
-    btn.innerHTML = tema === 'dark'
-      ? '<span aria-hidden="true">☀️</span> Claro'
-      : '<span aria-hidden="true">🌙</span> Escuro';
-  }
-
-  var salvo = window.localStorage ? localStorage.getItem(chave) : null;
-  var prefereEscuro = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  aplicar(salvo || (prefereEscuro ? 'dark' : 'light'));
-
-  btn.addEventListener('click', function () {
-    var atual = document.documentElement.getAttribute('data-theme');
-    aplicar(atual === 'dark' ? 'light' : 'dark');
-  });
-})();
-/* Barra de progresso de leitura */
-(function () {
-  var barra = document.createElement('div');
-  barra.className = 'progresso-leitura';
-  document.body.appendChild(barra);
-
-  function atualizar() {
-    var alturaTotal = document.documentElement.scrollHeight - window.innerHeight;
-    var progresso = alturaTotal > 0 ? (window.scrollY / alturaTotal) * 100 : 0;
-    barra.style.width = progresso + '%';
-  }
-
-  document.addEventListener('scroll', atualizar);
-  window.addEventListener('resize', atualizar);
-  atualizar();
-})();
-/* Botão voltar ao topo */
-(function () {
-  var btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'voltar-topo';
-  btn.setAttribute('aria-label', 'Voltar ao topo');
-  btn.innerHTML = '&uarr;';
-  document.body.appendChild(btn);
-
-  function alternarVisibilidade() {
-    btn.classList.toggle('visivel', window.scrollY > 400);
-  }
-
-  btn.addEventListener('click', function () {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  document.addEventListener('scroll', alternarVisibilidade);
-  alternarVisibilidade();
-})();
+}
