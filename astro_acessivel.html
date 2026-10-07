@@ -9,6 +9,34 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<style>
+/* Astro Acessível: demonstração (tudo contido nesta página) */
+.axd{display:grid;gap:12px;max-width:720px;margin-top:40px}
+.axd-r{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid var(--line);font-weight:500}
+.axd-s{display:flex;align-items:center;gap:10px}
+.axd-s output{min-width:3.4em;text-align:center;font-weight:800}
+.axd-g{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.axd button{font:inherit;font-size:.95rem;color:var(--ink);background:none;border:1px solid var(--ink);padding:14px 18px;cursor:pointer;text-align:left;transition:background .25s,color .25s}
+.axd button:hover:not(:disabled){background:var(--ink);color:var(--bg)}
+.axd button:disabled{opacity:.35;cursor:default}
+.axd-s button{text-align:center;font-weight:800;min-width:52px}
+.axd .axd-t[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.axd-x{text-align:center!important;border-style:dashed!important}
+.axd-ex{margin-top:40px;max-width:720px;border-top:1px solid var(--ink);padding-top:24px}
+.axd-ex h3{margin-bottom:12px}
+.axd-ex a{border-bottom:1px solid var(--ink)}
+:root.ax-contrast{--bg:#fff;--bg2:#fff;--ink:#000;--mute:#000;--line:#000;--hbg:#fff;--inv:#000}
+:root.ax-contrast[data-theme="dark"]{--bg:#000;--bg2:#000;--ink:#fff;--mute:#fff;--line:#fff;--hbg:#000;--inv:#000}
+@media(prefers-color-scheme:dark){:root.ax-contrast:not([data-theme="light"]){--bg:#000;--bg2:#000;--ink:#fff;--mute:#fff;--line:#fff;--hbg:#000;--inv:#000}}
+.ax-contrast footer p,.ax-contrast footer a,.ax-contrast .cp{color:#fff}
+.ax-contrast main a:not(.btn){text-decoration:underline}
+.ax-links a{text-decoration:underline!important;text-underline-offset:3px}
+.ax-font body,.ax-font body *:not(svg):not(path){font-family:Verdana,Arial,sans-serif!important;letter-spacing:normal!important}
+.ax-font h1,.ax-font h2,.ax-font h3{line-height:1.15!important}
+.ax-motion *,.ax-motion *::before,.ax-motion *::after{animation:none!important;transition:none!important}
+.ax-motion.js .rv{opacity:1!important;transform:none!important}
+@media(max-width:600px){.axd-g{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <header><div class="w nav">
@@ -26,8 +54,21 @@
 <button class="burger" aria-label="Abrir menu" aria-expanded="false"><i></i><i></i></button>
 </div></header>
 <main>
-<section class="ph"><div class="w"><a class="back" href="projetos.html">Voltar aos projetos</a><h1>Astro Acessível</h1><p class="lead">Plataforma desenvolvida para tornar experiências digitais mais acessíveis e inclusivas. Experimente os recursos agora, neste próprio site.</p><div class="btns"><button type="button" class="btn" data-astro-open>Experimentar o Astro Acessível</button></div></div></section>
+<section class="ph"><div class="w"><a class="back" href="projetos.html">Voltar aos projetos</a><h1>Astro Acessível</h1><p class="lead">Plataforma desenvolvida para tornar experiências digitais mais acessíveis e inclusivas. Experimente os recursos logo abaixo, nesta própria página.</p><div class="btns"><a href="#demonstracao" class="btn">Experimentar agora</a></div></div></section>
 <section class="sec" style="padding-top:0"><div class="w"><ul class="cols rv" style="margin-top:0"><li><small>01</small><h3>Navegação acessível</h3><p>Interface simples, com botões bem identificados e navegação facilitada para diferentes usuários.</p></li><li><small>02</small><h3>Alto contraste</h3><p>Opção para aumentar o contraste entre textos e fundo, facilitando a leitura.</p></li><li><small>03</small><h3>Ajuste de tamanho do texto</h3><p>O usuário pode aumentar ou diminuir o tamanho da fonte conforme sua necessidade.</p></li><li><small>04</small><h3>Mais opções de leitura</h3><p>Links sublinhados, fonte simples e opção de reduzir animações para uma leitura mais confortável.</p></li></ul></div></section>
+<section class="sec alt" id="demonstracao"><div class="w"><div class="rv"><h2>Experimente agora.</h2><p class="lead">Use os controles abaixo e veja esta página se adaptar em tempo real.</p></div>
+<div class="axd" role="group" aria-label="Controles do Astro Acessível">
+<div class="axd-r"><span>Tamanho do texto</span><div class="axd-s"><button type="button" data-a="menos" aria-label="Diminuir texto">A−</button><output aria-live="polite">100%</output><button type="button" data-a="mais" aria-label="Aumentar texto">A+</button></div></div>
+<div class="axd-g">
+<button type="button" class="axd-t" data-k="contrast" aria-pressed="false">Alto contraste</button>
+<button type="button" class="axd-t" data-k="links" aria-pressed="false">Sublinhar links</button>
+<button type="button" class="axd-t" data-k="font" aria-pressed="false">Fonte simples</button>
+<button type="button" class="axd-t" data-k="motion" aria-pressed="false">Reduzir animações</button>
+</div>
+<button type="button" class="axd-x" data-a="reset">Restaurar padrão</button>
+</div>
+<div class="axd-ex"><h3>Texto de exemplo</h3><p>Acessibilidade digital é garantir que qualquer pessoa consiga ler, navegar e usar um site, independente de limitações visuais, motoras ou de preferência. Veja como este texto e o <a href="projetos.html">link de exemplo</a> mudam conforme as opções escolhidas.</p></div>
+</div></section>
 </main>
 <footer><div class="w">
 <p>Tecnologia • Funcionalidade • Inovação • Experiência</p>
@@ -36,5 +77,29 @@
 <div class="cp">NEXA — soluções digitais acessíveis.</div>
 </div></footer>
 <script src="script.js"></script>
+<script>
+(function(){
+var S={size:100,contrast:false,links:false,font:false,motion:false},D=JSON.parse(JSON.stringify(S));
+var R=document.documentElement,box=document.getElementById('demonstracao'),out=box.querySelector('output');
+function apply(){
+  R.style.fontSize=S.size===100?'':S.size+'%';
+  R.classList.toggle('ax-contrast',S.contrast);R.classList.toggle('ax-links',S.links);
+  R.classList.toggle('ax-font',S.font);R.classList.toggle('ax-motion',S.motion);
+  out.textContent=S.size+'%';
+  box.querySelector('[data-a=menos]').disabled=S.size<=80;
+  box.querySelector('[data-a=mais]').disabled=S.size>=150;
+  box.querySelectorAll('[data-k]').forEach(function(b){b.setAttribute('aria-pressed',S[b.dataset.k])});
+}
+box.addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  if(b.dataset.k)S[b.dataset.k]=!S[b.dataset.k];
+  else if(b.dataset.a==='mais')S.size=Math.min(150,S.size+10);
+  else if(b.dataset.a==='menos')S.size=Math.max(80,S.size-10);
+  else if(b.dataset.a==='reset')S=JSON.parse(JSON.stringify(D));
+  apply();
+});
+apply();
+})();
+</script>
 </body>
 </html>
