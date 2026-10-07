@@ -108,3 +108,4 @@ footer :focus-visible{outline-color:#fff}
 .split,.pl li,.cg{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+.menu a{white-space:nowrap}
