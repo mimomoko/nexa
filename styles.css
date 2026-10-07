@@ -1,3 +1,11 @@
+/* ===== Parcerias: logos em preto e branco ===== */
+.pn{display:flex;align-items:center;gap:clamp(16px,3vw,32px)}
+.pn b{font-weight:800}
+.pn img{height:clamp(36px,5vw,52px);width:auto;max-width:90px;object-fit:contain;opacity:.9;transition:opacity .3s,transform .4s}
+.pt li:hover .pn img{opacity:1;transform:scale(1.08)}
+:root[data-theme="dark"] .pn img{filter:invert(1)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .pn img{filter:invert(1)}}
+ 
 /* ===== Início: eyebrow, informações em destaque e links ===== */
 .eyebrow{font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:24px;max-width:none}
 .home .w{width:100%}
