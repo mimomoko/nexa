@@ -96,21 +96,15 @@ footer p{color:#a8a8a6;font-size:.9rem}
 footer :focus-visible{outline-color:#fff}
 @media(max-width:1100px){
 .burger{display:block}
-.menu{position:fixed;top:72px;left:0;right:0;max-height:calc(100svh - 72px);overflow-y:auto;background:var(--bg);flex-direction:column;align-items:flex-start;padding:24px 20px 32px;gap:18px;font-size:1.4rem;font-weight:800;letter-spacing:-.03em;transform:translateY(-130%);transition:transform .45s cubic-bezier(.2,.7,.2,1);border-bottom:1px solid var(--line)}
-.menu.on{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.7,.2,1);}
-.dd{padding:0;width:100%}.sub{display:block;position:static;border:0;padding:8px 0 0 16px;background:none}
-.sub a{padding:6px 0;font-size:1.05rem;font-weight:500}.sub a:hover{background:none;padding-left:6px}
-.split,.pl li,.cg{grid-template-columns:1fr}
+.menu{position:fixed;top:calc(72px + env(safe-area-inset-top,0px));left:0;right:0;max-height:calc(100svh - 72px - env(safe-area-inset-top,0px));overflow-y:auto;background:var(--bg);flex-direction:column;align-items:flex-start;padding:24px 20px 32px;gap:18px;font-size:1.4rem;font-weight:800;letter-spacing:-.03em;transform:translateY(-130%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.7,.2,1),visibility 0s .45s;border-bottom:1px solid var(--line)}
+.menu.on{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.menu a{white-space:normal}
+.dd{padding:0;width:100%}
+.sub{display:block;position:static;border:0;padding:8px 0 0 16px;background:none}
+.sub a{padding:6px 0;font-size:1.05rem;font-weight:500}
+.sub a:hover{background:none;padding-left:6px}
 }
 @media(max-width:900px){
-  .split,.pl li,.cg{grid-template-columns:1fr}
+.split,.pl li,.cg{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}html{scroll-behavior:auto}}
-
-/*Estilização forms*/
-form{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:760px}
-form .full{grid-column:1/-1}
-label{display:grid;gap:8px;font-size:.85rem;font-weight:500}
-input,select,textarea{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--bg2);border:1px solid var(--line);border-radius:2px;padding:14px;min-height:44px}
-input:focus,select:focus,textarea:focus{border-color:var(--ink)}
-@media(max-width:900px){form{grid-template-columns:1fr}}
