@@ -31,4 +31,46 @@ if(fm)fm.onsubmit=e=>{
   const u='https://wa.me/5511974686516?text='+encodeURIComponent(t);
   if(!open(u,'_blank'))location.href=u;
   document.getElementById('ok').hidden=false;
+  * ===== Astro Acessível: recursos de acessibilidade do site ===== */
+(()=>{
+const K='astro-acessivel',D={size:100,contrast:false,links:false,font:false,motion:false};
+const S={...D};
+try{Object.assign(S,JSON.parse(localStorage.getItem(K)||'{}'))}catch(e){}
+const R=document.documentElement;
+const icon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="7.5" r="1.2" fill="currentColor"/><path d="M7 10.5l5 1 5-1M12 11.5v3.5M9.5 20l2.5-5 2.5 5"/></svg>';
+const opts=[['contrast','Alto contraste'],['links','Sublinhar links'],['font','Fonte simples'],['motion','Reduzir animações']];
+const w=document.createElement('div');w.className='ax';
+w.innerHTML='<button type="button" class="ax-b" aria-label="Abrir recursos de acessibilidade" aria-expanded="false" aria-controls="ax-p">'+icon+'</button>'+
+'<div class="ax-p" id="ax-p" role="dialog" aria-label="Astro Acessível" hidden><p class="ax-h">Astro Acessível</p>'+
+'<div class="ax-r"><span>Tamanho do texto</span><div class="ax-s"><button type="button" data-a="menos" aria-label="Diminuir texto">A−</button><output aria-live="polite"></output><button type="button" data-a="mais" aria-label="Aumentar texto">A+</button></div></div>'+
+opts.map(o=>'<button type="button" class="ax-t" data-k="'+o[0]+'" aria-pressed="false">'+o[1]+'</button>').join('')+
+'<button type="button" class="ax-x" data-a="reset">Restaurar padrão</button></div>';
+document.body.appendChild(w);
+const btn=w.querySelector('.ax-b'),pn=w.querySelector('.ax-p'),out=w.querySelector('output');
+function apply(){
+  R.style.fontSize=S.size===100?'':S.size+'%';
+  R.classList.toggle('ax-contrast',!!S.contrast);R.classList.toggle('ax-links',!!S.links);
+  R.classList.toggle('ax-font',!!S.font);R.classList.toggle('ax-motion',!!S.motion);
+  out.textContent=S.size+'%';
+  w.querySelector('[data-a=menos]').disabled=S.size<=80;
+  w.querySelector('[data-a=mais]').disabled=S.size>=150;
+  w.querySelectorAll('[data-k]').forEach(b=>b.setAttribute('aria-pressed',!!S[b.dataset.k]));
+  try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}
+}
+const open=o=>{pn.hidden=!o;btn.setAttribute('aria-expanded',o);if(o)pn.querySelector('button').focus()};
+btn.onclick=()=>open(pn.hidden);
+pn.onclick=e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.k)S[b.dataset.k]=!S[b.dataset.k];
+  else if(b.dataset.a==='mais')S.size=Math.min(150,S.size+10);
+  else if(b.dataset.a==='menos')S.size=Math.max(80,S.size-10);
+  else if(b.dataset.a==='reset')Object.assign(S,D);
+  apply();
+};
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!pn.hidden){open(false);btn.focus()}});
+addEventListener('click',e=>{if(!pn.hidden&&!w.contains(e.target)&&!e.target.closest('[data-astro-open]'))open(false)});
+document.querySelectorAll('[data-astro-open]').forEach(a=>a.onclick=()=>open(true));
+apply();
+})();
+ 
 };
