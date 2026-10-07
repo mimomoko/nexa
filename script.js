@@ -22,19 +22,13 @@ if(st){
     st.textContent='Fechado no momento. Abre '+(i===0?'hoje':i===1?'amanhã':D[nd])+' às '+f(H[nd][0]);
   }
 }
-/* orçamento: envia a solicitação por e-mail */
+/* orçamento: abre o WhatsApp com a solicitação preenchida */
 const fm=document.getElementById('f');
-if(fm)fm.onsubmit=async e=>{
+if(fm)fm.onsubmit=e=>{
   e.preventDefault();
-  const btn=fm.querySelector('button'),ok=document.getElementById('ok'),er=document.getElementById('err');
-  ok.hidden=er.hidden=true;btn.disabled=true;btn.textContent='Enviando…';
   const v=Object.fromEntries(new FormData(fm));
-  v._subject='Novo pedido de orçamento — NEXA';v._template='table';v._captcha='false';
-  try{
-    const r=await fetch('https://formsubmit.co/ajax/'+atob('YXRlbmRpbWVudG9uZXhhYUBnbWFpbC5jb20='),{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(v)});
-    const d=await r.json();
-    if(!r.ok||String(d.success)==='false')throw 0;
-    fm.reset();ok.hidden=false;
-  }catch(x){er.hidden=false}
-  btn.disabled=false;btn.textContent='Enviar solicitação';
+  const t='Olá! Gostaria de solicitar um orçamento.\n\nNome: '+v.nome+'\nEmpresa: '+(v.empresa||'-')+'\nE-mail: '+v.email+'\nWhatsApp: '+v.whats+'\nTipo de projeto: '+v.tipo+'\n\n'+(v.msg||'');
+  const u='https://wa.me/5511974686516?text='+encodeURIComponent(t);
+  if(!open(u,'_blank'))location.href=u;
+  document.getElementById('ok').hidden=false;
 };
