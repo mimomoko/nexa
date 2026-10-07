@@ -83,10 +83,17 @@ header::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--
 .pl h3 a::before{content:"";position:absolute;inset:0}
 .cat{display:block;font-size:.8rem;color:var(--mute);margin-bottom:10px}
 /* parcerias / certificados / horário / contato */
-.pt{list-style:none;padding:0;border-top:1px solid var(--ink)}
-.pt li{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px 24px;padding:28px 0;border-bottom:1px solid var(--line);font-weight:800;font-size:clamp(1.6rem,4vw,2.8rem);letter-spacing:-.05em;transition:padding .35s}
+.pt li{display:grid;grid-template-columns:72px 1fr auto;align-items:center;column-gap:28px;padding:28px 0;border-bottom:1px solid var(--line);font-weight:800;font-size:clamp(1.6rem,4vw,2.8rem);letter-spacing:-.05em;line-height:1.1;transition:padding .35s}
 .pt li:hover{padding-left:16px}
-.pt span{font-weight:400;font-size:.9rem;letter-spacing:0;color:var(--mute)}
+.pt li img,.pt li svg{width:72px;height:52px;object-fit:contain;object-position:left center}
+.pt span{font-weight:400;font-size:.9rem;letter-spacing:0;color:var(--mute);text-align:right}
+:root[data-theme="dark"] .pt img{filter:invert(1)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .pt img{filter:invert(1)}}
+@media(max-width:700px){
+  .pt li{grid-template-columns:56px 1fr;column-gap:20px}
+  .pt li img,.pt li svg{width:56px;height:44px}
+  .pt span{grid-column:2;text-align:left;margin-top:6px}
+}
 .cg{display:grid;grid-template-columns:1fr 1fr;gap:56px 40px}
 .cg div{border-top:1px solid var(--ink);padding-top:20px}
 .cg h3{margin-bottom:16px}
