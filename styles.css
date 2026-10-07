@@ -15,8 +15,8 @@ p{color:var(--mute);font-size:.98rem;max-width:56ch}
 .lead{font-size:1.1rem;margin-top:28px}
 section,.sec{padding:clamp(56px,8vw,110px) 0}
 /* cabeçalho */
-header{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);background:var(--hbg);backdrop-filter:blur(10px)}
-body.sc header{border-bottom:1px solid var(--line)}
+header{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px)}
+header::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--hbg);backdrop-filter:blur(10px)}body.sc header{border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;height:72px;gap:12px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.7rem;letter-spacing:-.07em;margin-right:auto}
 .lg{width:40px;height:40px;mix-blend-mode:multiply}
