@@ -31,4 +31,25 @@ if(fm)fm.onsubmit=e=>{
   const u='https://wa.me/5511974686516?text='+encodeURIComponent(t);
   if(!open(u,'_blank'))location.href=u;
   document.getElementById('ok').hidden=false;
+  /* ===== Rodapé (substitui o rodapé de todas as páginas) ===== */
+(()=>{
+const f=document.querySelector('footer');if(!f)return;
+const ic=(p)=>'<svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+p+'</svg>';
+const soc=[
+ ['https://instagram.com/nexa','Instagram @nexa',ic('<rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/>')],
+ ['https://wa.me/5511974686516','WhatsApp',ic('<path d="M3 21l1.65-4.9A9 9 0 1 1 8 19.4L3 21z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8c-.8-.4-1.600-1.200-2-2l.8-1-1-2L9 9.500z"/>')],
+ ['mailto:contato@nexa.com','E-mail',ic('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>')]
+];
+const lk=[['index','Sobre nós'],['projetos','Projetos'],['parcerias','Parcerias'],['certificados','Certificados'],['horario','Horários'],['orcamento','Faça um orçamento']];
+const pt=[['microsoft','Microsoft'],['oracle','Oracle'],['google','Google'],['senac','Senac']];
+f.className='ft2';
+f.innerHTML='<div class="w">'+
+'<div class="ft-top"><a class="ft-logo" href="index.html" aria-label="NEXA, página inicial">nexa</a>'+
+'<div class="ft-info"><p>NEXA · <a href="mailto:contato@nexa.com">contato@nexa.com</a> · <a href="tel:+5511974686516">+55 11 97468-6516</a> · © '+new Date().getFullYear()+' NEXA</p>'+
+'<nav aria-label="Links do rodapé">'+lk.map(l=>'<a href="'+l[0]+'.html">'+l[1]+'</a>').join('')+'</nav></div></div>'+
+'<div class="ft-mid"><div class="ft-soc">'+soc.map(s=>'<a href="'+s[0]+'" aria-label="'+s[1]+'"'+(s[0].indexOf('http')===0?' target="_blank" rel="noopener"':'')+'>'+s[2]+'</a>').join('')+'</div>'+
+'<ul class="ft-pt" aria-label="Parceiros">'+pt.map(p=>'<li><img src="logos/'+p[0]+'.png" alt="'+p[1]+'" loading="lazy"></li>').join('')+'</ul></div></div>'+
+'<div class="ft-bt"><div class="w"><span>NEXA — soluções digitais acessíveis.</span><span>Tecnologia • Funcionalidade • Inovação • Experiência</span></div></div>';
+})();
+
 };
