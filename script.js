@@ -52,6 +52,6 @@ f.innerHTML='<div class="w">'+
 '<div class="ft-info"><p>NEXA · <a href="mailto:contato@nexa.com">contato@nexa.com</a> · <a href="tel:+5511974686516">+55 11 97468-6516</a> · © '+new Date().getFullYear()+' NEXA</p>'+
 '<nav aria-label="Links do rodapé">'+lk.map(l=>'<a href="'+l[0]+'.html">'+l[1]+'</a>').join('')+'</nav></div></div>'+
 '<div class="ft-mid"><div class="ft-soc">'+soc.map(s=>'<a href="'+s[0]+'" aria-label="'+s[1]+'"'+(s[0].indexOf('http')===0?' target="_blank" rel="noopener"':'')+'>'+s[2]+'</a>').join('')+'</div>'+
-'<ul class="ft-pt" aria-label="Parceiros">'+pt.map(p=>'<li><img src="logos/'+p[0]+'.png" alt="'+p[1]+'" loading="lazy"></li>').join('')+'</ul></div></div>'+
+'<ul class="ft-pt" aria-label="Parceiros">'+pt.map(p=>'<li><img src="'+p[0]+'.png" alt="'+p[1]+'" loading="lazy"></li>').join('')+'</ul></div></div>'+
 '<div class="ft-bt"><div class="w"><span>NEXA — soluções digitais acessíveis.</span><span>Tecnologia • Funcionalidade • Inovação • Experiência</span></div></div>';
 })();
