@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Astro Data — NEXA</title>
+<meta name="description" content="Astro Data: painel de produtividade de vendas da NEXA para organizar, gerenciar e apresentar informações.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1117;--panel:#121B24;--line:#22303D;--ink:#E8EEF4;--mute:#8DA0B3;--g:#3DDC97;--b:#5AA9FF;--y:#FFB547;--v:#B28CFF;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Space Grotesk',Arial,sans-serif;line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-weight:700;letter-spacing:-.03em;line-height:1.05}
+h1{font-size:clamp(2.3rem,6vw,4.6rem);max-width:16ch}
+h2{font-size:clamp(1.5rem,3.2vw,2.3rem)}
+h3{font-size:1.1rem}
+a{color:inherit}
+p{color:var(--mute)}
+.w{max-width:1160px;margin:0 auto;padding:0 clamp(18px,4vw,36px)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.skip{position:absolute;left:16px;top:-60px;background:var(--g);color:#06140D;padding:10px 16px;z-index:100;transition:top .2s}
+.skip:focus{top:12px}
+:focus-visible{outline:3px solid var(--g);outline-offset:3px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 0;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;letter-spacing:-.03em;font-size:1.2rem}
+.brand i{width:26px;height:26px;border:2px solid var(--g);border-radius:6px;display:grid;grid-template-columns:repeat(3,1fr);align-items:end;gap:2px;padding:3px}
+.brand i b{background:var(--g);display:block}.brand i b:nth-child(1){height:40%}.brand i b:nth-child(2){height:100%}.brand i b:nth-child(3){height:65%}
+.top nav{display:flex;gap:6px;flex-wrap:wrap}
+.top nav a{padding:8px 14px;font-size:.9rem;text-decoration:none;color:var(--mute);border-radius:8px;transition:color .2s,background .2s}
+.top nav a:hover{color:var(--ink);background:var(--panel)}
+.top nav .pill{background:var(--g);color:#06140D;font-weight:700}
+.top nav .pill:hover{background:#6FF0B8;color:#06140D}
+.hero{padding:clamp(36px,6vw,80px) 0 clamp(20px,3vw,32px)}
+.tag{display:inline-block;font:500 .75rem 'IBM Plex Mono',monospace;color:var(--g);border:1px solid var(--g);padding:4px 12px;border-radius:99px;margin-bottom:20px}
+.hero p{font-size:1.1rem;max-width:50ch;margin-top:18px}
+.bar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:14px 0 6px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips button{font:inherit;font-size:.85rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:8px 16px;cursor:pointer;transition:border-color .2s}
+.chips button:hover{border-color:var(--mute)}
+.chips button[aria-pressed="true"]{background:var(--g);color:#06140D;border-color:var(--g);font-weight:700}
+select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+select:focus{border-color:var(--g)}
+.grid{display:grid;gap:16px}
+.k4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.c2{grid-template-columns:1.5fr 1fr}
+section{padding:clamp(14px,2.4vw,24px) 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card h3{color:var(--mute);font-weight:500;font-size:.85rem;letter-spacing:0;margin-bottom:10px}
+.kv{font:500 clamp(1.7rem,3.4vw,2.4rem)/1 'IBM Plex Mono',Consolas,monospace}
+.dl{display:block;margin-top:10px;font:.78rem 'IBM Plex Mono',monospace;color:var(--g)}
+.res{margin-top:6px;color:var(--ink);font-size:1.02rem}
+.res b{color:var(--g);font-weight:500}
+/* barras */
+.bars{display:flex;gap:10px;height:230px;margin-top:14px}
+.bars>div{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;font:.72rem 'IBM Plex Mono',monospace;color:var(--mute);min-width:0}
+.bars b{color:var(--ink);font-weight:500;white-space:nowrap}
+.tk2{position:relative;flex:1;width:100%;display:flex;align-items:flex-end}
+.tk2 span{display:block;width:100%;border-radius:6px 6px 0 0;transform-origin:bottom;animation:gr .8s cubic-bezier(.2,.7,.2,1) both}
+.tk2 i{position:absolute;left:-6px;right:-6px;border-top:2px dashed var(--y)}
+@keyframes gr{from{transform:scaleY(0)}}
+.key{display:flex;gap:16px;flex-wrap:wrap;font-size:.78rem;color:var(--mute);margin-top:12px}
+.key i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}
+.key s{display:inline-block;width:16px;border-top:2px dashed var(--y);margin-right:6px;vertical-align:middle}
+.dn{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.dn svg{width:140px;height:140px;transform:rotate(-90deg);flex:none}
+.dn circle{fill:none;stroke-width:5}
+.lg{list-style:none;padding:0;display:grid;gap:8px;font-size:.88rem;flex:1;min-width:150px}
+.lg li{display:flex;align-items:center;gap:8px}
+.lg i{width:12px;height:12px;border-radius:3px;display:block}
+.lg b{margin-left:auto;font:500 .82rem 'IBM Plex Mono',monospace;padding-left:12px}
+/* funil */
+.fn{display:grid;gap:10px;margin-top:6px}
+.fn div{display:grid;grid-template-columns:110px 1fr 90px;gap:12px;align-items:center;font-size:.9rem}
+.fn span{display:block;height:30px;border-radius:6px;background:linear-gradient(90deg,var(--b),#3b7fcf);transition:width .7s cubic-bezier(.2,.7,.2,1)}
+.fn div:last-child span{background:linear-gradient(90deg,var(--g),#1f9d6a)}
+.fn em{font:normal .8rem 'IBM Plex Mono',monospace;color:var(--mute);text-align:right}
+/* tabela */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+table{width:100%;border-collapse:collapse;min-width:620px}
+th,td{text-align:left;padding:13px 18px;border-bottom:1px solid var(--line);font-size:.92rem}
+tr:last-child td{border-bottom:0}
+td.n{font-family:'IBM Plex Mono',monospace}
+th button{font:inherit;font-weight:500;font-size:.8rem;color:var(--mute);background:none;border:0;cursor:pointer;padding:0}
+th button:hover{color:var(--ink)}
+th[aria-sort] button{color:var(--g)}
+th[aria-sort="ascending"] button::after{content:" ▲"}th[aria-sort="descending"] button::after{content:" ▼"}
+tbody tr{transition:background .2s}tbody tr:hover,tbody tr.sel{background:#17232e}
+td .vn{font:inherit;color:var(--ink);background:none;border:0;cursor:pointer;padding:0;text-align:left;border-bottom:1px dashed var(--mute)}
+td .vn:hover{color:var(--g)}
+.mt{display:flex;align-items:center;gap:10px}
+.mt i{display:block;width:70px;height:7px;background:var(--line);border-radius:9px;overflow:hidden}
+.mt i u{display:block;height:100%;background:var(--y);border-radius:9px}
+.mt i u.ok{background:var(--g)}
+.hint{font-size:.85rem;margin-top:10px}
+.sh{margin:clamp(20px,3vw,32px) 0 16px}
+.ft{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.ft .card b{font:500 .8rem 'IBM Plex Mono',monospace;color:var(--g);display:block;margin-bottom:28px}
+.ft .card h3{color:var(--ink);font-size:1.25rem}
+.ft .card p{margin-top:8px;font-size:.95rem}
+.end{border-top:1px solid var(--line);margin-top:clamp(36px,6vw,64px);padding:clamp(36px,6vw,64px) 0 28px}
+.end .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.btn{font:inherit;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-block;background:var(--g);color:#06140D;border:1px solid var(--g);border-radius:10px;padding:11px 20px}
+.btn:hover{background:#6FF0B8}
+.btn.o{background:none;color:var(--ink);border-color:var(--line)}.btn.o:hover{border-color:var(--ink);background:none}
+.end small{display:block;margin-top:40px;color:var(--mute)}
+@media(max-width:820px){.c2{grid-template-columns:1fr}.fn div{grid-template-columns:90px 1fr 70px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<div class="w">
+<header class="top">
+<a class="brand" href="astro_data_demo.html" aria-label="Astro Data, início"><i aria-hidden="true"><b></b><b></b><b></b></i>Astro Data</a>
+<nav aria-label="Navegação principal"><a href="projetos.html">Projetos</a><a href="index.html">Site da NEXA</a><a class="pill" href="orcamento.html">Orçamento</a></nav>
+</header>
+<main id="conteudo">
+<section class="hero">
+<span class="tag">Demonstração interativa · dados fictícios</span>
+<h1>A produtividade de vendas da sua empresa, à vista.</h1>
+<p>Painel para organização, gerenciamento e apresentação de informações. Troque o período ou o vendedor e veja os números mudarem.</p>
+</section>
+
+<div class="bar">
+<div class="chips" id="pe" role="group" aria-label="Período"></div>
+<div><label for="vd" class="vh">Vendedor</label><select id="vd"></select></div>
+</div>
+<section aria-label="Resumo"><p class="res" id="res" aria-live="polite"></p></section>
+<section aria-label="Indicadores"><div class="grid k4" id="kpi"></div></section>
+
+<section aria-label="Gráficos"><div class="grid c2">
+<div class="card"><h3 id="gt">Faturamento</h3><div class="bars" id="bars" role="img" aria-label="Gráfico de barras do faturamento no período"></div>
+<div class="key"><span><i style="background:var(--b)"></i>Abaixo da meta</span><span><i style="background:var(--g)"></i>Meta atingida</span><span><s></s>Meta do intervalo</span></div></div>
+<div class="card"><h3>Faturamento por linha de venda</h3><div class="dn"><svg viewBox="0 0 36 36" id="dn" role="img" aria-label="Gráfico de rosca por linha de venda"></svg><ul class="lg" id="lg"></ul></div></div>
+</div></section>
+
+<section aria-labelledby="t1"><div class="card"><h2 id="t1" style="font-size:1.3rem;margin-bottom:16px">Funil de vendas</h2><div class="fn" id="fn"></div></div></section>
+
+<section aria-labelledby="t2"><div class="sh"><h2 id="t2">Desempenho da equipe.</h2></div>
+<div class="tw"><table><thead><tr id="hd"></tr></thead><tbody id="tb"></tbody></table></div>
+<p class="hint">Clique no nome de um vendedor para ver os números só dele. Clique de novo para voltar à equipe toda.</p></section>
+
+<section aria-labelledby="t3"><div class="sh"><h2 id="t3">O que o Astro Data entrega.</h2></div>
+<div class="grid ft">
+<div class="card"><b>01</b><h3>Visão por equipe e por pessoa</h3><p>Do resultado geral ao desempenho de cada vendedor, em uma única tela.</p></div>
+<div class="card"><b>02</b><h3>Metas e conversão</h3><p>Acompanhe metas, funil e taxa de conversão para saber onde agir primeiro.</p></div>
+<div class="card"><b>03</b><h3>Decisão com dados</h3><p>Indicadores e gráficos que se atualizam conforme o filtro, prontos para apresentar à diretoria.</p></div>
+</div></section>
+</main>
+<footer class="end"><h2>Quer um painel assim para o seu negócio?</h2>
+<div class="row"><a class="btn" href="orcamento.html">Solicitar orçamento</a><a class="btn o" href="projetos.html">Ver outros projetos</a></div>
+<small>NEXA — soluções digitais acessíveis.</small></footer>
+</div>
+<script>
+(function(){
+var V=[['Ana Beatriz',120,34,2850,90000],['Carlos Eduardo',98,22,3100,80000],['Fernanda Lima',135,41,2400,95000],['Rafael Souza',88,15,3600,70000],['Juliana Prado',110,29,2700,80000],['Marcos Vinícius',76,18,2200,60000]];
+var PER={'7':{n:'7 dias',f:.24,w:[.12,.15,.14,.18,.2,.13,.08],lb:['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],d:'+4%'},'30':{n:'30 dias',f:1,w:[.21,.24,.26,.29],lb:['Sem 1','Sem 2','Sem 3','Sem 4'],d:'+8%'},'90':{n:'90 dias',f:3.05,w:[.3,.33,.37],lb:['Mês 1','Mês 2','Mês 3'],d:'+12%'}};
+var CAT=[['Equipamentos',.38],['Serviços',.27],['Assinaturas',.22],['Acessórios',.13]],COL=['#5AA9FF','#3DDC97','#B28CFF','#FFB547'];
+var cur='30',sel=-1,sk='fat',sd=-1,$=function(x){return document.getElementById(x)};
+var brl=function(n){return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0})};
+var mil=function(n){return n>=1000?'R$ '+(n/1000).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+' mil':'R$ '+n};
+function calc(){
+  var f=PER[cur].f;
+  return V.map(function(v,i){var L=Math.round(v[1]*f),C=Math.round(v[2]*f),m=Math.round(v[4]*f);return{i:i,nome:v[0],L:L,C:C,fat:C*v[3],meta:m,conv:C/L*100,pm:C*v[3]/m*100}});
+}
+function render(){
+  var R=calc(),S=sel<0?R:[R[sel]],P=PER[cur];
+  var L=0,C=0,F=0,M=0;S.forEach(function(r){L+=r.L;C+=r.C;F+=r.fat;M+=r.meta});
+  var pm=Math.round(F/M*100),top=R.slice().sort(function(a,b){return b.fat-a.fat})[0],q=sel<0?'equipe':R[sel].nome;
+  /* resumo */
+  $('res').innerHTML=sel<0?'<b>'+top.nome+'</b> lidera em faturamento ('+mil(top.fat)+'). A equipe está em <b>'+pm+'%</b> da meta'+(F<M?' e faltam '+mil(M-F)+'.':', meta superada.')
+    :'<b>'+q+'</b> está em <b>'+pm+'%</b> da meta, com '+C+' vendas fechadas. '+(F<M?'Faltam '+mil(M-F)+' para a meta.':'Meta superada.');
+  /* indicadores */
+  var K=[['Faturamento',mil(F),P.d+' vs. período anterior'],['Vendas fechadas',C,'de '+L+' leads'],['Ticket médio',brl(Math.round(F/C)),'por venda'],['Meta atingida',pm+'%','meta: '+mil(M)]];
+  $('kpi').innerHTML=K.map(function(k){return '<div class="card"><h3>'+k[0]+'</h3><div class="kv">'+k[1]+'</div><span class="dl">'+k[2]+'</span></div>'}).join('');
+  /* barras */
+  $('gt').textContent='Faturamento · '+q+' · '+P.n;
+  var vals=P.w.map(function(w){return Math.round(F*w)}),g=M/P.w.length,mx=Math.max(Math.max.apply(null,vals),g)*1.08;
+  $('bars').innerHTML=vals.map(function(v,i){var ok=v>=g;return '<div><b>'+(v>=1000?(v/1000).toFixed(0)+'k':v)+'</b><div class="tk2"><span style="height:'+(v/mx*100)+'%;background:linear-gradient('+(ok?'#3DDC97,#1f9d6a':'#5AA9FF,#2f6fb8')+');animation-delay:'+(i*.06)+'s"></span><i style="bottom:'+(g/mx*100)+'%"></i></div>'+P.lb[i]+'</div>'}).join('');
+  /* rosca */
+  var off=0,sv='<circle cx="18" cy="18" r="15.9155" stroke="#22303D"/>';
+  CAT.forEach(function(c,i){var p=c[1]*100;sv+='<circle cx="18" cy="18" r="15.9155" stroke="'+COL[i]+'" stroke-dasharray="'+p+' '+(100-p)+'" stroke-dashoffset="'+(-off)+'"/>';off+=p});
+  $('dn').innerHTML=sv;
+  $('lg').innerHTML=CAT.map(function(c,i){return '<li><i style="background:'+COL[i]+'"></i>'+c[0]+'<b>'+mil(Math.round(F*c[1]))+'</b></li>'}).join('');
+  /* funil */
+  var E=[['Leads',L],['Propostas',Math.round(L*.55)],['Negociação',Math.round(L*.3)],['Fechadas',C]];
+  $('fn').innerHTML=E.map(function(e){var p=e[1]/L*100;return '<div><b style="font-weight:500">'+e[0]+'</b><span style="width:'+Math.max(p,3)+'%"></span><em>'+e[1]+' · '+Math.round(p)+'%</em></div>'}).join('');
+  /* tabela */
+  var T=R.slice().sort(function(a,b){var x=a[sk],y=b[sk];return (x>y?1:x<y?-1:0)*sd});
+  $('tb').innerHTML=T.map(function(r){return '<tr class="'+(r.i===sel?'sel':'')+'"><td><button type="button" class="vn" data-i="'+r.i+'" aria-pressed="'+(r.i===sel)+'">'+r.nome+'</button></td><td class="n">'+r.C+'</td><td class="n">'+brl(r.fat)+'</td><td class="n">'+r.conv.toFixed(1).replace('.',',')+'%</td><td><div class="mt"><i><u class="'+(r.pm>=100?'ok':'')+'" style="width:'+Math.min(r.pm,100)+'%;display:block"></u></i><span class="n">'+Math.round(r.pm)+'%</span></div></td></tr>'}).join('');
+  document.querySelectorAll('#hd th').forEach(function(t){if(t.dataset.k===sk)t.setAttribute('aria-sort',sd>0?'ascending':'descending');else t.removeAttribute('aria-sort')});
+}
+/* controles */
+Object.keys(PER).forEach(function(k){var b=document.createElement('button');b.type='button';b.textContent='Últimos '+PER[k].n;b.dataset.p=k;b.setAttribute('aria-pressed',k===cur);$('pe').appendChild(b)});
+$('pe').onclick=function(e){var b=e.target.closest('button');if(!b)return;cur=b.dataset.p;document.querySelectorAll('#pe button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});render()};
+var o0=document.createElement('option');o0.value=-1;o0.textContent='Toda a equipe';$('vd').appendChild(o0);
+V.forEach(function(v,i){var o=document.createElement('option');o.value=i;o.textContent=v[0];$('vd').appendChild(o)});
+$('vd').onchange=function(){sel=+this.value;render()};
+[['nome','Vendedor'],['C','Vendas'],['fat','Faturamento'],['conv','Conversão'],['pm','Meta']].forEach(function(c){var th=document.createElement('th');th.scope='col';th.dataset.k=c[0];th.innerHTML='<button type="button">'+c[1]+'</button>';$('hd').appendChild(th)});
+$('hd').onclick=function(e){var t=e.target.closest('th');if(!t)return;var k=t.dataset.k;sd=(sk===k)?-sd:(k==='nome'?1:-1);sk=k;render()};
+$('tb').onclick=function(e){var b=e.target.closest('.vn');if(!b)return;var i=+b.dataset.i;sel=(sel===i)?-1:i;$('vd').value=sel;render()};
+render();
+})();
+</script>
+</body>
+</html>
