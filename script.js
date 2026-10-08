@@ -7,6 +7,7 @@ addEventListener('keydown',e=>{if(e.key==='Escape')tg(false)});
 addEventListener('scroll',()=>document.body.classList.toggle('sc',scrollY>20),{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(e=>io.observe(e));
+
 /* horário de funcionamento */
 const st=document.getElementById('status-text');
 if(st){
@@ -22,6 +23,7 @@ if(st){
     st.textContent='Fechado no momento. Abre '+(i===0?'hoje':i===1?'amanhã':D[nd])+' às '+f(H[nd][0]);
   }
 }
+
 /* orçamento: abre o WhatsApp com a solicitação preenchida */
 const fm=document.getElementById('f');
 if(fm)fm.onsubmit=e=>{
@@ -31,7 +33,9 @@ if(fm)fm.onsubmit=e=>{
   const u='https://wa.me/5511974686516?text='+encodeURIComponent(t);
   if(!open(u,'_blank'))location.href=u;
   document.getElementById('ok').hidden=false;
-  /* ===== Rodapé (substitui o rodapé de todas as páginas) ===== */
+};
+
+/* ===== Rodapé (substitui o rodapé de todas as páginas) ===== */
 (()=>{
 const f=document.querySelector('footer');if(!f)return;
 const ic=(p)=>'<svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+p+'</svg>';
@@ -51,5 +55,3 @@ f.innerHTML='<div class="w">'+
 '<ul class="ft-pt" aria-label="Parceiros">'+pt.map(p=>'<li><img src="logos/'+p[0]+'.png" alt="'+p[1]+'" loading="lazy"></li>').join('')+'</ul></div></div>'+
 '<div class="ft-bt"><div class="w"><span>NEXA — soluções digitais acessíveis.</span><span>Tecnologia • Funcionalidade • Inovação • Experiência</span></div></div>';
 })();
-
-};
