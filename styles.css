@@ -172,4 +172,28 @@ form button.btn:disabled{opacity:.5;cursor:wait;transform:none}
 @media(max-width:700px){
   form{grid-template-columns:1fr;gap:32px}
   form button.btn{justify-self:stretch}
+ /* ===== Rodapé no estilo institucional escuro ===== */
+footer.ft2{background:var(--inv);color:#fff;padding:48px 0 0;margin-top:clamp(40px,6vw,80px)}
+.ft2 p{color:#fff;font-size:.85rem;max-width:none}
+.ft2 a{color:#fff}
+.ft-top{display:flex;gap:clamp(24px,5vw,56px);align-items:flex-start;flex-wrap:wrap}
+.ft-logo{font-weight:900;font-size:2.4rem;letter-spacing:-.07em;line-height:1}
+.ft-info{display:grid;gap:14px;flex:1;min-width:260px}
+.ft-info p a:hover{text-decoration:underline}
+.ft-info nav{display:flex;gap:8px 0;flex-wrap:wrap;font-size:.8rem;font-weight:500}
+.ft-info nav a{display:inline-flex;align-items:center;transition:opacity .2s}
+.ft-info nav a:hover{opacity:.7}
+.ft-info nav a+a::before{content:"";width:5px;height:5px;background:#fff;margin:0 12px;display:inline-block}
+.ft-mid{display:flex;justify-content:space-between;align-items:center;gap:24px 40px;flex-wrap:wrap;margin-top:40px;padding-bottom:40px}
+.ft-soc{display:flex;gap:16px}
+.ft-soc a{width:40px;height:40px;border-radius:50%;background:#fff;display:grid;place-items:center;transition:transform .3s,background .3s}
+.ft-soc a:hover{transform:translateY(-3px);background:#d8d8d6}
+.ft-soc svg{width:20px;height:20px}
+.ft-pt{list-style:none;display:flex;gap:clamp(20px,3vw,36px);align-items:center;flex-wrap:wrap;padding:0}
+.ft-pt img{height:32px;width:auto;max-width:80px;object-fit:contain;filter:invert(1);opacity:.85;transition:opacity .3s}
+.ft-pt img:hover{opacity:1}
+.ft-bt{border-top:1px solid #555;padding:20px 0 24px;font-size:.78rem;color:#d8d8d6}
+.ft-bt .w{display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap}
+.ft2 :focus-visible{outline-color:#fff}
+
 }
