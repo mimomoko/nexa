@@ -4,11 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Astro Data — NEXA</title>
-<meta name="description" content="Astro Data — projeto desenvolvido pela NEXA.">
+<meta name="description" content="Astro Data — painel de produtividade de vendas da NEXA para organizar, gerenciar e apresentar informações.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<style>
+.ah{display:grid;grid-template-columns:minmax(0,1fr) min(380px,32vw);gap:clamp(24px,4vw,56px);align-items:end}
+.dm{position:relative;border:1px solid var(--ink);background:#fff;overflow:hidden;aspect-ratio:1;width:100%;box-shadow:0 0 0 0 rgba(0,0,0,0);transition:transform .4s,box-shadow .4s}
+.dm:hover{transform:translateY(-6px);box-shadow:0 14px 28px rgba(0,0,0,.16)}
+.dm-vp{position:absolute;inset:0;overflow:hidden}
+.dm-vp iframe{position:absolute;top:0;left:0;width:900px;height:900px;border:0;transform-origin:0 0;transform:scale(.42);pointer-events:none}
+.dm-tag{position:absolute;left:12px;top:12px;background:var(--bg);color:var(--ink);border:1px solid var(--ink);padding:4px 12px;font-size:.72rem;font-weight:500}
+.dm-go{position:absolute;inset:0;display:flex;align-items:flex-end;padding:16px;transition:background .3s}
+.dm-go span{background:var(--ink);color:var(--bg);padding:11px 20px;font-size:.82rem;font-weight:500;transition:transform .3s}
+.dm:hover .dm-go,.dm-go:focus-visible{background:rgba(0,0,0,.08)}
+.dm:hover .dm-go span{transform:translateY(-4px)}
+@media(max-width:900px){.ah{grid-template-columns:1fr}.dm{max-width:420px}}
+</style>
 </head>
 <body>
 <header><div class="w nav">
@@ -26,13 +39,29 @@
 <button class="burger" aria-label="Abrir menu" aria-expanded="false"><i></i><i></i></button>
 </div></header>
 <main>
-<section class="ph"><div class="w"><a class="back" href="projetos.html">Voltar aos projetos</a><h1>Astro Data</h1><p class="lead">Sistema de Assistência Técnica</p></div></section><section class="sec" style="padding-top:0"><div class="w"><ul class="cols rv" style="margin-top:0"><li><small>01</small><h3>Gestão inteligente</h3><p>Centralização das informações de clientes, aparelhos e ordens de serviço em uma única plataforma.</p></li><li><small>02</small><h3>Acompanhamento simplificado</h3><p>O cliente acompanha o andamento do reparo utilizando apenas o número da ordem de serviço.</p></li><li><small>03</small><h3>Experiência conectada</h3><p>Uma interface pensada para tornar o atendimento mais rápido, organizado e acessível.</p></li></ul></div></section>
+<section class="ph"><div class="w ah">
+<div><a class="back" href="projetos.html">Voltar aos projetos</a><h1>Astro Data</h1><p class="lead">Painel de produtividade de vendas para organização, gerenciamento e apresentação de informações</p></div>
+<div class="dm">
+<div class="dm-vp"><iframe src="astro_data_demo.html" title="Prévia do Astro Data" tabindex="-1" aria-hidden="true" loading="lazy" scrolling="no" inert></iframe></div>
+<span class="dm-tag" aria-hidden="true">Demonstração</span>
+<a class="dm-go" href="astro_data_demo.html" aria-label="Abrir a demonstração do Astro Data"><span>Abrir demonstração</span></a>
+</div></div></section>
+<section class="sec" style="padding-top:0"><div class="w"><ul class="cols rv" style="margin-top:0"><li><small>01</small><h3>Visão por equipe e por pessoa</h3><p>Do resultado geral ao desempenho de cada vendedor, em uma única tela.</p></li><li><small>02</small><h3>Metas e conversão</h3><p>Acompanhe metas, funil e taxa de conversão para saber onde agir primeiro.</p></li><li><small>03</small><h3>Decisão com dados</h3><p>Indicadores e gráficos que se atualizam conforme o filtro, prontos para apresentar à diretoria.</p></li></ul></div></section>
 </main>
 <footer><div class="w">
 <p>Tecnologia • Funcionalidade • Inovação • Experiência</p>
+<p><a href="mailto:contato@nexa.com.br">contato@nexa.com.br</a></p>
 <div class="wm" aria-hidden="true">nexa</div>
 <div class="cp">NEXA — soluções digitais acessíveis.</div>
 </div></footer>
 <script src="script.js"></script>
+<script>
+(function(){
+var v=document.querySelector('.dm-vp'),i=v.querySelector('iframe');
+function f(){i.style.transform='scale('+(v.clientWidth/900)+')'}
+f();addEventListener('resize',f);
+if(window.ResizeObserver)new ResizeObserver(f).observe(v);
+})();
+</script>
 </body>
 </html>
