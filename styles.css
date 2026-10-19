@@ -13,6 +13,25 @@
 .pt li:hover .pn img{opacity:1;transform:scale(1.08)}
 :root[data-theme="dark"] .pn img{filter:invert(1)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .pn img{filter:invert(1)}}
+
+/* Estrutura da lista de parcerias */
+.pt li {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  align-items: center;
+  column-gap: 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+  letter-spacing: -.05em;
+  line-height: 1.1;
+  transition: padding .35s;
+}
+
+.pn {
+  display: contents; /* Permite que o <img> e o <b> ocupem as colunas independentes do grid */
+}
  
 /* ===== Início: eyebrow, informações em destaque e links ===== */
 .eyebrow{font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:24px;max-width:none}
